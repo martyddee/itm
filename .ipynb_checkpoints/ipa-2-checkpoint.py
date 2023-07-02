@@ -38,12 +38,13 @@ def shift_letter(letter, shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     if ord(letter) == 32:
-        print(" ")
+        shifted_letter = " "
     else:
         new_letter = ord(letter) + shift
         while new_letter > 90:
             new_letter = 65 + (new_letter - 91)
-        print(chr(new_letter))
+        shifted_letter = chr(new_letter)
+    return shifted_letter
 
 def caesar_cipher(message, shift):
     '''Caesar Cipher.
@@ -66,14 +67,17 @@ def caesar_cipher(message, shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     all_caps_message = message.upper()
+    shifted_message = ""
+    
     for character in all_caps_message:
         if ord(character) == 32:
-            print(" ")
+            shifted_message += " "
         else:
             new_character = ord(character) + shift
             while new_character > 90:
                 new_character = 65 + ord(character) + shift - 91
-        print(chr(new_character), end = "")
+            shifted_message += chr(new_character)
+    return shifted_message
 
 def shift_by_letter(letter, letter_shift):
     '''Shift By Letter.
@@ -104,13 +108,14 @@ def shift_by_letter(letter, letter_shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     if ord(letter) == 32:
-        print(" ")
+        shifted_letter = " "
     else:
         new_letter_shift = ord(letter_shift) - 65
         new_letter = ord(letter) + new_letter_shift
         while new_letter > 90:
             new_letter = 65 + (new_letter - 91)
-        print(chr(new_letter))
+        shifted_letter = chr(new_letter)
+    return shifted_letter
 
 def vigenere_cipher(message, key):
     '''Vigenere Cipher.
@@ -152,19 +157,22 @@ def vigenere_cipher(message, key):
     # 2nd term: gets the remainder of the key that can only fit a part of its length
     # extended the length of the key to equal the length of the message ensure that each character in the message has its own key
     
+    shifted_message = ""
     for i in range(length):
         character = message[i]
         shift = extended_key[i]
         # matches up the characters of both the message and the extended key that share the same index
         
         if ord(character) == 32:
-            print(" ", end = "")
+            shifted_message += " "
         else:
             key_shift = ord(shift) - 65
             new_character = ord(character) + key_shift
             while new_character > 90:
                 new_character = 65 + ord(character) + key_shift - 91
-            print(chr(new_character), end = "")
+            shifted_message += chr(new_character)
+    
+    return shifted_message
 
 def scytale_cipher(message, shift):
     '''Scytale Cipher.
@@ -219,20 +227,28 @@ def scytale_cipher(message, shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     length = len(message)
-    if length % shift == 0:
-        message = message
+    if shift <= 0:
+        return "error"
+    elif length == 0:
+        return ""
+    elif length % shift == 0:
+        pass
     else:
-        message = message + "_"*(shift-(length // shift))
+        message += "_" * (shift - (length % shift))
+        
     # these conditionals check if the length of the message is a multiple of the shift
+    # conditionals also check for errors (i.e. shift <= 0, etc.)
     # the 'else' statement add the number of underscores needed to be added to the message for it to be a mulitple of the shift value
-
+    
+    length = len(message)
     encrypted_message = ""
+   
     for i in range(length):
         index = (i // shift) + (length // shift) * (i % shift)
         # got the formula from the given info
         encrypted_message += message[index]
-
-    return encrypted_message  
+         
+    return encrypted_message    
 
 def scytale_decipher(message, shift):
     '''Scytale De-cipher.
