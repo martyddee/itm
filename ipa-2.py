@@ -43,6 +43,7 @@ def shift_letter(letter, shift):
         new_letter = ord(letter) + shift
         while new_letter > 90:
             new_letter = 65 + (new_letter - 91)
+            break
         shifted_letter = chr(new_letter)
     return shifted_letter
 
@@ -76,6 +77,7 @@ def caesar_cipher(message, shift):
             new_character = ord(character) + shift
             while new_character > 90:
                 new_character = 65 + ord(character) + shift - 91
+                break
             shifted_message += chr(new_character)
     return shifted_message
 
@@ -114,6 +116,7 @@ def shift_by_letter(letter, letter_shift):
         new_letter = ord(letter) + new_letter_shift
         while new_letter > 90:
             new_letter = 65 + (new_letter - 91)
+            break
         shifted_letter = chr(new_letter)
     return shifted_letter
 
@@ -170,6 +173,7 @@ def vigenere_cipher(message, key):
             new_character = ord(character) + key_shift
             while new_character > 90:
                 new_character = 65 + ord(character) + key_shift - 91
+                break
             shifted_message += chr(new_character)
     
     return shifted_message
