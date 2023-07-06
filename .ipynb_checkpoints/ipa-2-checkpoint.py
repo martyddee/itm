@@ -37,6 +37,8 @@ def shift_letter(letter, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
+    shift = shift % 26
+    
     if ord(letter) == 32:
         shifted_letter = " "
     else:
@@ -45,6 +47,7 @@ def shift_letter(letter, shift):
             new_letter = 65 + (new_letter - 91)
             break
         shifted_letter = chr(new_letter)
+    
     return shifted_letter
 
 def caesar_cipher(message, shift):
@@ -67,6 +70,7 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
+    shift = shift % 26
     all_caps_message = message.upper()
     shifted_message = ""
     
@@ -79,6 +83,7 @@ def caesar_cipher(message, shift):
                 new_character = 65 + ord(character) + shift - 91
                 break
             shifted_message += chr(new_character)
+    
     return shifted_message
 
 def shift_by_letter(letter, letter_shift):
@@ -118,6 +123,7 @@ def shift_by_letter(letter, letter_shift):
             new_letter = 65 + (new_letter - 91)
             break
         shifted_letter = chr(new_letter)
+    
     return shifted_letter
 
 def vigenere_cipher(message, key):
@@ -231,6 +237,7 @@ def scytale_cipher(message, shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     length = len(message)
+    
     if shift <= 0:
         return "error"
     elif length == 0:
@@ -284,9 +291,11 @@ def scytale_decipher(message, shift):
     decrypted_message = ""
     length = len(message)
     shift = length // shift
+    
     for i in range(length):
         index = (i // shift) + (length // shift) * (i % shift)
         decrypted_message += message[index]
+    
     return decrypted_message
 
     # changed the formula of the index, it rotates the orientation of the scytale_cipher
